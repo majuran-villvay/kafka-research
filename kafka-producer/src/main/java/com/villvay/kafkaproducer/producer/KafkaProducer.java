@@ -1,8 +1,12 @@
 package com.villvay.kafkaproducer.producer;
 
+import com.villvay.kafkaproducer.model.OrderHistoryMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
 import static com.villvay.kafkaproducer.util.Constant.ORDER_HISTORY_TOPIC;
@@ -11,10 +15,15 @@ import static com.villvay.kafkaproducer.util.Constant.ORDER_HISTORY_TOPIC;
 @Slf4j
 public class KafkaProducer {
     @Autowired
-    private KafkaTemplate<String, String> kafkaTemplate;
+    private KafkaTemplate<String, OrderHistoryMessage> kafkaTemplate;
 
-    public void sendMessage(String message) {
-        log.info("Sending message {}", message);
-        kafkaTemplate.send(ORDER_HISTORY_TOPIC, message);
+    public void sendMessage(OrderHistoryMessage orderHistoryMessage) {
+        log.info("Sending message {}", orderHistoryMessage);
+
+        Message<OrderHistoryMessage> message = MessageBuilder.withPayload(orderHistoryMessage)
+                .setHeader(KafkaHeaders.TOPIC, ORDER_HISTORY_TOPIC)
+                .build();
+
+        kafkaTemplate.send(message);
     }
 }

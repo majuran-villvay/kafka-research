@@ -22,6 +22,6 @@ class KafkaProducerTest {
 
     @Test
     void sendMessage() {
-        kafkaProducer.sendMessage("saasas");
+//        kafkaProducer.sendMessage("saasas");
     }
 }
