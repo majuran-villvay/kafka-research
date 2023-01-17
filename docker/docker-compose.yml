@@ -24,3 +24,35 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+    
+  # schema:
+  #   image: confluentinc/cp-schema-registry:6.1.9
+  #   container_name: schema-registry
+  #   ports:
+  #     - 8081:8081   
+  #   links:
+  #     - zookeeper    
+  #     - broker    
+  #   environment:
+  #     SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: zookeeper:2181
+  #     SCHEMA_REGISTRY_HOST_NAME: localhost
+  #     SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
+  #     SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://kafka:9092
+  #     SCHEMA_REGISTRY_DEBUG: true
+
+  schema-registry:
+    image: confluentinc/cp-schema-registry:6.1.9
+    hostname: schema-registry
+    container_name: schema-registry
+    depends_on:
+      - broker
+    ports:
+      - "8081:8081"
+    environment:
+      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: 'broker:29092'
+      SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
+      SCHEMA_REGISTRY_DEBUG: true
+
+# https://github.com/confluentinc/cp-all-in-one/blob/7.3.0-post/cp-all-in-one/docker-compose.yml
+# https://github.com/confluentinc/cp-all-in-one/blob/6.1.9-post/cp-all-in-one/docker-compose.yml

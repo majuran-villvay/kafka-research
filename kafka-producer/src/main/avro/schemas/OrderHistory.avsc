@@ -1,0 +1,28 @@
+{
+  "type": "record",
+  "name": "OrderHistory",
+  "namespace": "com.villvay.kafkaproducer.avro.schema",
+  "fields": [
+    {
+      "name": "orderId",
+      "type": "string",
+      "default": "0"
+    },
+    {
+      "name": "message",
+      "type": [
+        "null",
+        "string"
+      ],
+      "default": null
+    },
+    {
+      "name": "price",
+      "type": [
+        "null",
+        "string"
+      ],
+      "default": null
+    }
+  ]
+}

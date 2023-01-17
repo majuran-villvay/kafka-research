@@ -1,5 +1,6 @@
 package com.villvay.kafkaproducer.controller;
 
+import com.villvay.kafkaproducer.avro.schema.OrderHistory;
 import com.villvay.kafkaproducer.model.OrderHistoryMessage;
 import com.villvay.kafkaproducer.producer.KafkaProducer;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +22,13 @@ public class MessageController {
     @PostMapping("/publish")
     public ResponseEntity<OrderHistoryMessage> publish(@RequestBody OrderHistoryMessage orderHistoryMessage) {
         log.info("MessageController:publish: {}", orderHistoryMessage);
-        kafkaProducer.sendMessage(orderHistoryMessage);
+        OrderHistory orderHistory = OrderHistory.newBuilder().build();
+        orderHistory.setMessage(orderHistoryMessage.getMessage());
+        orderHistory.setOrderId(orderHistoryMessage.getOrderId());
+        orderHistory.setPrice(orderHistoryMessage.getPrice());
+
+
+        kafkaProducer.sendMessage(orderHistory);
         return ResponseEntity.ok().body(orderHistoryMessage);
     }
 
