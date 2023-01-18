@@ -22,10 +22,14 @@ public class MessageController {
     @PostMapping("/publish")
     public ResponseEntity<OrderHistoryMessage> publish(@RequestBody OrderHistoryMessage orderHistoryMessage) {
         log.info("MessageController:publish: {}", orderHistoryMessage);
-        OrderHistory orderHistory = OrderHistory.newBuilder().build();
-        orderHistory.setMessage(orderHistoryMessage.getMessage());
-        orderHistory.setOrderId(orderHistoryMessage.getOrderId());
-        orderHistory.setPrice(orderHistoryMessage.getPrice());
+        OrderHistory orderHistory = OrderHistory.newBuilder()
+                .setMessage(orderHistoryMessage.getMessage())
+                .setOrderId(orderHistoryMessage.getOrderId())
+                .setPrice(orderHistoryMessage.getPrice())
+                .build();
+//        orderHistory.setMessage(orderHistoryMessage.getMessage());
+//        orderHistory.setOrderId(orderHistoryMessage.getOrderId());
+//        orderHistory.setPrice(orderHistoryMessage.getPrice());
 
 
         kafkaProducer.sendMessage(orderHistory);

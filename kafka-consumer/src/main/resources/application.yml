@@ -1,16 +1,8 @@
 server:
-  port: 9000
+  port: 9001
 
 spring:
   kafka:
-    bootstrap-servers: localhost:9092
-    producer:
-      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      properties:
-        schema:
-          registry:
-            url: http://localhost:8081
     consumer:
       auto-offset-reset: earliest
       bootstrap-servers: localhost:9092
@@ -24,6 +16,10 @@ spring:
         specific:
           avro:
             reader: true
+#        spring:
+#          json:
+#            trusted:
+#              packages: '*'
 
 avro:
   topic:

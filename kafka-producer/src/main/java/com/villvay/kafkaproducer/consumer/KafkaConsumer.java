@@ -1,4 +1,4 @@
-package com.villvay.kafkaconsumer.consumer;
+package com.villvay.kafkaproducer.consumer;
 
 import com.villvay.kafkaproducer.avro.schema.OrderHistory;
 import lombok.extern.slf4j.Slf4j;
