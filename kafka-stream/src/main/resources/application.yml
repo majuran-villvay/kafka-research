@@ -1,0 +1,21 @@
+server:
+  port: 9007
+
+spring:
+  kafka:
+    streams:
+      bootstrap-servers: localhost:9092
+      application-id: kafka-stream-id
+#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+#      properties:
+#        schema:
+#          registry:
+#            url: http://localhost:8081
+#        specific:
+#          avro:
+#            reader: true
+
+#avro:
+#  topic:
+#    name: spring.boot.order.history.avro.topic.v1
