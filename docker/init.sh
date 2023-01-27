@@ -1,7 +1,7 @@
 #! /bin/bash
 docker-compose down && docker container prune -f && docker-compose up -d
 
-sleep 10
+sleep 30
 
 # Run this command to create a topic named users.
 docker-compose exec broker kafka-topics --create --bootstrap-server \
